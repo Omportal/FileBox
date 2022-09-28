@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% load static %}
+{% block title %}FileBox{% endblock %}
+
+
+
+{% block content %}
+    <h1>FileBox</h1>
+    {% for file in content %}
+    <a href="{{ file.upload.url }}" download >{{ file.name }}</a>
+    {% endfor %}
+{% endblock %}
