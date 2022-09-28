@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "filebox"
+version = "0.1.0"
+description = "FileManager"
+authors = ["vyacheslav.v <vyacheslav.v@itfox-web.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.1.1"
+envparse = "^0.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
