@@ -5,8 +5,25 @@
 
 
 {% block content %}
-    <h1>FileBox</h1>
-    {% for file in content %}
-    <a href="{{ file.upload.url }}" download >{{ file.name }}</a>
-    {% endfor %}
+<style>
+  .content__stack {display:flex;}
+  .content__stack {flex-direction:column;}
+  img {width: 50px;}
+</style>
+  <div class='container'>
+    <div class='content__stack'>
+      
+      {% for file in content %}
+        {% if file.upload %}   
+        <a href="{{ file.upload.url }}" download >{% if file.is_img %}<img src="{{ file.upload.url }}">{% endif %}{{ file.name }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  <form method='POST'>
+  {% csrf_token %}
+  {{ form.file_field }}
+  <input type='submit' value='Загрузить'/>
+  <form/>
+  </div>
+
 {% endblock %}
