@@ -11,16 +11,20 @@ from apps.content_app.models import Content
 from .forms import ContentForm
 # Create your views here.
 
+
 class MainView(TemplateView):
     template_name: str = 'index.html'
+
 
 class ContentView(FormView):
     form_class = ContentForm
     success_url = 'content'
+
     template_name: str = 'content_app/base.html'
 
     def get(self, request, *args, **kwargs):
         content = Content.objects.all()
+
         return render(request, self.template_name, {'content': content})
     
     def post(self, request, *args, **kwargs):
