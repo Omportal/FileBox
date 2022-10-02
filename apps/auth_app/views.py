@@ -63,7 +63,7 @@ class LoginView(View):
             if user is not None:
                 if check_password(dto.password, user.password):
 
-                    # TODO разобраться с аутетнтификацией
+                    # TODO 
 
                     user = authenticate(request=request)
                     login(request, user)
