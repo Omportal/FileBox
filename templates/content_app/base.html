@@ -19,9 +19,9 @@
         {% endif %}
       {% endfor %}
     </div>
-  <form method='POST'>
+  <form method='POST' enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.file_field }}
+  {{ form }}
   <input type='submit' value='Загрузить'/>
   <form/>
   </div>

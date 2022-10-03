@@ -1,10 +1,11 @@
 from multiprocessing import AuthenticationError
 from django.shortcuts import render
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth import logout
 from django.views.generic import FormView, View
 from django.urls import reverse
 from django.contrib.auth import login, authenticate
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .dto import RawAuthDTO, LoginDTO
 from utils.exceptions import InvalidPassword
 from .forms import SignUpForm, LoginForm
@@ -62,13 +63,19 @@ class LoginView(View):
             user = AuthAppRepository.get_user_by_email_password(dto=dto)
             if user is not None:
                 if check_password(dto.password, user.password):
-
-                    # TODO 
-
-                    user = authenticate(request=request)
+                    user = authenticate(request=request, email=dto.email)
                     login(request, user)
                 else:
                     raise InvalidPassword
             return HttpResponseRedirect(reverse('content'))
 
         return render(request, self.template_name, {'form': form})
+
+
+class LogoutView(View):
+
+    template_name = 'content_app/base.html'
+
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return HttpResponseRedirect(reverse('login'))
